@@ -94,12 +94,10 @@ class AuthControllerTest {
     void testRegisterErrorHandling() {
         // Arrange
         when(authenticationService.signup(registerUserDto)).thenThrow(new RuntimeException("Error during registration"));
-        System.out.println("im here before");
 
         // Act
         ResponseEntity<?> response = authController.register(registerUserDto ,mock(BindingResult.class));
 
-        System.out.println("im here: " + response.getBody().toString());
         // Assert
         assertEquals(400, response.getStatusCodeValue());
         assertTrue(response.getBody().toString().contains("Error during registration"));
@@ -138,118 +136,3 @@ class AuthControllerTest {
         assertTrue(response.getBody().toString().contains("Invalid credentials"));
     }
 }
-
-//package com.example.movieticketbookingsystem.controller;
-//
-//import com.example.movieticketbookingsystem.constants.AppConstants;
-//import com.example.movieticketbookingsystem.constants.LoginResponse;
-//import com.example.movieticketbookingsystem.dtos.LoginUserDto;
-//import com.example.movieticketbookingsystem.dtos.RegisterUserDto;
-//import com.example.movieticketbookingsystem.entity.User;
-//import com.example.movieticketbookingsystem.service.AuthenticationService;
-//import com.example.movieticketbookingsystem.service.JwtService;
-//import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
-//import org.mockito.InjectMocks;
-//import org.mockito.Mock;
-//import org.mockito.MockitoAnnotations;
-//import org.springframework.http.ResponseEntity;
-//
-//import static org.mockito.ArgumentMatchers.any;
-//import static org.mockito.Mockito.*;
-//import static org.junit.jupiter.api.Assertions.*;
-//
-//class AuthControllerTest {
-//
-//    @Mock
-//    private AuthenticationService authenticationService;
-//
-//    @Mock
-//    private JwtService jwtService;
-//
-//    @InjectMocks
-//    private AuthController authController;
-//
-//    private RegisterUserDto registerUserDto;
-//    private LoginUserDto loginUserDto;
-//    private User user;
-//
-//    @BeforeEach
-//    void setUp() {
-//        MockitoAnnotations.openMocks(this); // Initialize mocks
-//
-//        // Sample data for testing
-//        user = new User();
-//        user.setId(1L);
-//        user.setEmail("test@example.com");
-//        user.setPassword("password");
-//
-//        registerUserDto = new RegisterUserDto("test@example.com", "password", "testUser", AppConstants.Role.ADMIN);
-//
-//
-//        loginUserDto = new LoginUserDto("test@example.com", "password");
-//    }
-//
-//    @Test
-//    void testRegisterSuccess() {
-//        // Arrange
-//        when(authenticationService.signup(any(RegisterUserDto.class))).thenReturn(user);
-//
-//        // Act
-//        ResponseEntity<User> response = authController.register(registerUserDto);
-//
-//        // Assert
-//        assertEquals(200, response.getStatusCodeValue()); // HTTP 200 OK
-//        assertNotNull(response.getBody());
-//        assertEquals(user.getUsername(), response.getBody().getUsername());
-//        verify(authenticationService, times(1)).signup(any(RegisterUserDto.class)); // Verify signup was called once
-//    }
-//
-//    @Test
-//    void testRegisterFailure() {
-//        // Arrange
-//        when(authenticationService.signup(any(RegisterUserDto.class))).thenThrow(new RuntimeException("Registration failed"));
-//
-//        // Act & Assert
-//        Exception exception = assertThrows(RuntimeException.class, () -> {
-//            authController.register(registerUserDto);
-//        });
-//
-//        assertEquals("Registration failed", exception.getMessage());
-//        verify(authenticationService, times(1)).signup(any(RegisterUserDto.class)); // Ensure signup was called
-//    }
-//
-//    @Test
-//    void testLoginSuccess() {
-//        // Arrange
-//        String jwtToken = "mocked_jwt_token";
-//        when(authenticationService.authenticate(any(LoginUserDto.class))).thenReturn(user);
-//        when(jwtService.generateToken(any(User.class))).thenReturn(jwtToken);
-//        when(jwtService.getExpirationTime()).thenReturn(3600L); // Expiration time in seconds
-//
-//        // Act
-//        ResponseEntity<LoginResponse> response = authController.authenticate(loginUserDto);
-//
-//        // Assert
-//        assertEquals(200, response.getStatusCodeValue()); // HTTP 200 OK
-//        assertNotNull(response.getBody());
-//        assertEquals(jwtToken, response.getBody().getToken());
-//        assertEquals(3600L, response.getBody().getExpiresIn());
-//        verify(authenticationService, times(1)).authenticate(any(LoginUserDto.class)); // Ensure authenticate was called
-//        verify(jwtService, times(1)).generateToken(any(User.class)); // Ensure JWT was generated
-//    }
-//
-//    @Test
-//    void testLoginFailure() {
-//        // Arrange
-//        when(authenticationService.authenticate(any(LoginUserDto.class))).thenThrow(new RuntimeException("Invalid credentials"));
-//
-//        // Act & Assert
-//        Exception exception = assertThrows(RuntimeException.class, () -> {
-//            authController.authenticate(loginUserDto);
-//        });
-//
-//        assertEquals("Invalid credentials", exception.getMessage());
-//        verify(authenticationService, times(1)).authenticate(any(LoginUserDto.class)); // Ensure authenticate was called
-//    }
-//}

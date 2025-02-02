@@ -48,6 +48,10 @@ public class User implements UserDetails {
         return password;
     }
 
+    public String getFullName() {
+        return fullName;
+    }
+
     @Override
     public String getUsername() {
         return email;

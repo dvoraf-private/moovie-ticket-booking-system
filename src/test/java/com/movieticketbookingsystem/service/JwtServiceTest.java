@@ -1,4 +1,4 @@
-//package com.example.movieticketbookingsystem.service;
+//package com.movieticketbookingsystem.service;
 //
 //import io.jsonwebtoken.Claims;
 //import io.jsonwebtoken.Jwts;

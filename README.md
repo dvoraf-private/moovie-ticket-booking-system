@@ -26,13 +26,24 @@ Before running the application, you need the following tools installed on your m
 - If Maven is not installed, you can download it from [here](https://maven.apache.org/download.cgi).
 
 
-### 3 **MySQL** for database setup)
+### 3 **MySQL** (for database setup)
 - Ensure that MySQL is installed and running.
 - Verify the installation by running:
   ```bash
    mysql --version
   ```
 - If MySQL is not installed, you can download it from [here]().
+
+
+### 4 **Docker** (for running the integration tests using Testcontainers)
+- Ensure that Docker is installed on your machine.
+- Check if Docker is installed by running:
+
+  ```bash
+    docker -version
+  ```
+- If Docker is not installed, you can download it from [here](https://docs.docker.com/desktop/setup/install/mac-install/).
+
 
 ## Steps to Run the Application
 ### 1. Clone the Repository
@@ -47,12 +58,12 @@ cd movieticketbookingsystem
    **Create a MySQL Database** for the application:
 
 ```
-CREATE DATABASE movie_ticket_booking;
+CREATE DATABASE moviedb;
 ```
 **Configure the Database** in application.properties:
 
 ```
-spring.datasource.url=jdbc:mysql://localhost:3306/movie_ticket_booking
+spring.datasource.url=jdbc:mysql://localhost:3306/moviedb
 spring.datasource.username=root
 spring.datasource.password=yourpassword
 spring.jpa.hibernate.ddl-auto=update
@@ -136,7 +147,7 @@ The database connection details are set in the `application.properties` file. Yo
 Example MySQL connection settings:
 
 ```
-spring.datasource.url=jdbc:mysql://localhost:3306/movie_ticket_booking
+spring.datasource.url=jdbc:mysql://localhost:3306/moviedb
 spring.datasource.username=root
 spring.datasource.password=yourpassword
 ```

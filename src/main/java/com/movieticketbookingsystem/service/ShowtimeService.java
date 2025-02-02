@@ -33,7 +33,6 @@ public class ShowtimeService {
         Theater theater = theaterRepository.findById(theaterId).orElseThrow(() -> new ResourceNotFoundException("Theater not found"));
         showtimeDetails.setMovie(movie);
         showtimeDetails.setTheater(theater);
-        System.out.println("im here 11!!");
 
         // run validations
         runShowtimeValidationBeforeSave(showtimeDetails, movie);
@@ -47,11 +46,9 @@ public class ShowtimeService {
                 .orElseThrow(() -> new ResourceNotFoundException("Showtime not found for this id: " + showtimeId));
 
         runShowtimeValidationBeforeSave(showtimeDetails, showtime.getMovie());
-
         // Update the showtime fields with the new details
         showtime.setStartTime(showtimeDetails.getStartTime());
         showtime.setEndTime(showtimeDetails.getEndTime());
-
 
         // Save the updated showtime and return it (no casting needed)
         return showtimeRepository.save(showtime);  // Returning Showtime directly
@@ -79,7 +76,6 @@ public class ShowtimeService {
                 showtime.getTheater(), showtime.getStartTime(), showtime.getEndTime());
 
         if (!overlappingShowtimes.isEmpty()) {
-            System.out.println("im here 33!!");
             throw new RuntimeException("There is already an overlapping showtime in this theater.");
         }
     }

@@ -24,8 +24,14 @@ public class MovieController {
     )
     @PostMapping
     public ResponseEntity<Movie> addMovie(@Valid @RequestBody Movie movie) {
-        Movie savedMovie = movieService.addMovie(movie);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedMovie);
+        try {
+
+            Movie savedMovie = movieService.addMovie(movie);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedMovie);
+        }
+        catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 
     @Operation(
