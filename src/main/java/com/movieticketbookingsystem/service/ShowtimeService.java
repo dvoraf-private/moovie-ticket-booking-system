@@ -47,8 +47,12 @@ public class ShowtimeService {
 
         runShowtimeValidationBeforeSave(showtimeDetails, showtime.getMovie());
         // Update the showtime fields with the new details
-        showtime.setStartTime(showtimeDetails.getStartTime());
-        showtime.setEndTime(showtimeDetails.getEndTime());
+        if (showtimeDetails.getStartTime() != null) {
+            showtime.setStartTime(showtimeDetails.getStartTime());
+        }
+        if (showtimeDetails.getEndTime() != null) {
+            showtime.setStartTime(showtimeDetails.getEndTime());
+        }
 
         // Save the updated showtime and return it (no casting needed)
         return showtimeRepository.save(showtime);  // Returning Showtime directly

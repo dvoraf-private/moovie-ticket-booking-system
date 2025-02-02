@@ -50,8 +50,8 @@ Before running the application, you need the following tools installed on your m
    Clone the project repository to your local machine:
 
 ```
-git clone https://github.com/your-repo/movieticketbookingsystem.git
-cd movieticketbookingsystem
+git clone git@github.com:dvoraf-private/moovie-ticket-booking-system.git
+cd moovie-ticket-booking-system
 ```
 
 ### 2. Set Up the Database

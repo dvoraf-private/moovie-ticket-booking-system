@@ -27,12 +27,23 @@ public class MovieService {
     public Movie updateMovie(Long id, Movie updatedMovie) {
         Movie existingMovie = movieRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Movie not found!"));
-//        modelMapper.map(updatedMovie, existingMovie);
-        existingMovie.setTitle(updatedMovie.getTitle());
-        existingMovie.setGenre(updatedMovie.getGenre());
-        existingMovie.setRating(updatedMovie.getRating());
-        existingMovie.setDuration(updatedMovie.getDuration());
-        existingMovie.setReleaseYear(updatedMovie.getReleaseYear());
+
+        // TODO refactor to use mapper model
+        if (updatedMovie.getTitle() != null) {
+            existingMovie.setTitle(updatedMovie.getTitle());
+        }
+        if (updatedMovie.getGenre() != null) {
+            existingMovie.setGenre(updatedMovie.getGenre());
+        }
+        if (updatedMovie.getRating() != -1) {
+            existingMovie.setRating(updatedMovie.getRating());
+        }
+        if (updatedMovie.getDuration() != -1) {
+            existingMovie.setDuration(updatedMovie.getDuration());
+        }
+        if (updatedMovie.getReleaseYear() != -1) {
+            existingMovie.setReleaseYear(updatedMovie.getReleaseYear());
+        }
         return movieRepository.save(existingMovie);
     }
 
